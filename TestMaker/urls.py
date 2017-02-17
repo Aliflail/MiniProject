@@ -18,8 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    #this is the url for adding the  urls in the accounts app,which are there in urls.py in accounts app
-    url(r'',include('accounts.urls')),
-    #likewise in compiler
-
+    url(r'',include('accounts.urls'))
 ]
