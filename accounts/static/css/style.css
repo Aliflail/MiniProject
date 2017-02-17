@@ -8,15 +8,17 @@
     margin-top: 20vh;
     margin-bottom: 50vh;
     height: 100%;
-    background: white; }
+    background-color: white; }
     .frontpage .main .header .pageheader {
-      text-transform: uppercase;
-      color: black; }
-      .frontpage .main .header .pageheader .adjust {
-        font-size: 0.8em;
-        opacity: 0.7;
-        position: relative;
-        left: 10vh; }
+      font-size: 100px;
+      background: url(http://www.impublications.com/sites/default/files/books.jpg);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase; }
 .frontpage .login {
   background: white;
   height: 100vh; }
