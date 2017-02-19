@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, login ,logout,get_user_model
+from accounts.models import Profile
 User=get_user_model()
 class LoginForm(forms.Form):
     email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -15,3 +16,11 @@ class LoginForm(forms.Form):
         if not user.is_active:
             raise forms.ValidationError("This user is no longer active")
         return super(LoginForm,self).clean()
+
+class ProfileForm(forms.ModelForm):
+    admissionno=forms.CharField(max_length=7,widget=forms.TextInput(attrs={"class":"form-control"}))
+    name=forms.CharField(max_length=14,widget=forms.TextInput(attrs={"class":"form-control"}))
+    class Meta:
+        model= Profile
+        fields=['admissionno','name','status']
+

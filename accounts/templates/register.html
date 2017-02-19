@@ -1,10 +1,67 @@
-{% extends 'base.html' %}
+  {% extends 'base.html' %}
 {% block body %}
+<div class="jumbotron col-md-5 col-md-offset-3 registration ">
+    <label><h2>Registion Form</h2></label>
+    <form action="." method="post">{% csrf_token %}
+        	{{ form.non_field_errors }}
 
-<form action="." method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-</form>
+               <div class="profile-group">
+              {{ profile.name.errors }}
+            <label for="{{ profile.status.id_for_label }}">UserName</label>
 
+              {{ profile.name }}
+
+              </div>
+
+			  <div class="form-group">
+				  {{ form.email.errors }}
+			    <label for="{{ form.email.id_for_label }}">Email address</label>
+
+				{{ form.email }}
+
+			  </div>
+			  <div class="form-group">
+				  {{ form.password1.errors }}
+			    <label for="{{ form.password1.id_for_label }}">Password</label>
+
+				  {{ form.password1 }}
+
+			  </div>
+
+                <div class="form-group">
+				  {{ form.password2.errors }}
+			    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+
+				  {{ form.password2 }}
+
+			  </div>
+
+            {{ profile.non_field_errors }}
+
+              <div class="profile-group">
+                  {{ profile.admissionno.errors }}
+                <label for="{{ profile.admissionno.id_for_label }}">Admissionno </label>
+                  {{ profile.admissionno }}
+
+              </div>
+
+
+
+              <div class="profile-group">
+                  {{ profile.status.errors }}
+                <label for="{{ profile.status.id_for_label }}">Status</label>
+
+                  {{ profile.status }}
+
+              </div>
+
+
+
+
+
+        <input type="submit">
+    </form>
+
+</div>
 
 {% endblock %}

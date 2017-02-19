@@ -2,6 +2,7 @@ $length: 200px
 $border-length: 20px
 $time: 15s
 $font: 30px
+$grey: #d8d0c0
 *
 	//border: 1px black solid
 .frontpage
@@ -11,10 +12,10 @@ $font: 30px
 		background-repeat: no-repeat
 		background-position: center
 		background-size: cover
+		height: 100vh
 		.header
-			margin-top: 30vh
-			margin-bottom: 40vh
-			height: 100%
+			position: absolute
+			top: 200px
 			background-color: white
 			.pageheader
 				font-size: 100px
@@ -36,7 +37,7 @@ $font: 30px
 			margin-top: 15vh
 			padding-top: 5vh
 			padding-bottom: 5vh
-			background-color: #d8d0c0
+			background-color: $grey
 		.l
 			background-color: white
 			margin-bottom: 20px
@@ -126,4 +127,17 @@ $font: 30px
 		color: yellow
 .paused
 	animation-play-state: paused
-  
+.registration
+	margin-top: 100px
+	*
+		margin-bottom: 10px
+.side
+	background-color: #DBFFB3
+	height: 20vh
+	h2
+		text-transform: capitalize
+	.nav-pills>li>a:hover
+		background-color: white
+.rightside
+	height: 90vh
+	background-color: orange

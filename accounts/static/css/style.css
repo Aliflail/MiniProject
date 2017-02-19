@@ -3,11 +3,11 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; }
+  background-size: cover;
+  height: 100vh; }
   .frontpage .main .header {
-    margin-top: 30vh;
-    margin-bottom: 40vh;
-    height: 100%;
+    position: absolute;
+    top: 200px;
     background-color: white; }
     .frontpage .main .header .pageheader {
       font-size: 100px;
@@ -122,5 +122,22 @@
     color: yellow; } }
 .paused {
   animation-play-state: paused; }
+
+.registration {
+  margin-top: 100px; }
+  .registration * {
+    margin-bottom: 10px; }
+
+.side {
+  background-color: #DBFFB3;
+  height: 20vh; }
+  .side h2 {
+    text-transform: capitalize; }
+  .side .nav-pills > li > a:hover {
+    background-color: white; }
+
+.rightside {
+  height: 90vh;
+  background-color: orange; }
 
 /*# sourceMappingURL=style.css.map */

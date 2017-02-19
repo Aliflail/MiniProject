@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-
+from django.conf import settings
+from django.db.models.signals import post_save
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -77,3 +78,33 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+class Profile(models.Model):
+    
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    admissionno = models.CharField(max_length=7)
+    choice = (
+        ('PC', 'Placement_Cell'),
+        ('TC', 'Training_Cell'),
+        ('ST', 'Student'),
+    )
+    status = models.CharField(max_length=2, choices=choice, default='ST')
+    standard=models.CharField(max_length=5,default="CSA")
+    name=models.CharField(max_length=14,unique=True)
+    slug=models.SlugField(max_length=14,default="bineta")
+    def _str_(self):
+        return self.user.email
+
+    def __unicode__(self):
+        return self.user.email
+
+
+def post_save_user_model_reciever(sender, instance, created, *args, **kwargs):
+    if created:
+        try:
+            Profile.objects.create(MyUser=instance)
+        except:
+            pass
+
+
+post_save.connect(post_save_user_model_reciever, sender=settings.AUTH_USER_MODEL)
