@@ -13,8 +13,7 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("THis user does not exist")
         if not user.check_password(password):
             raise forms.ValidationError("Incorrect Password")
-        if not user.is_active:
-            raise forms.ValidationError("This user is no longer active")
+    
         return super(LoginForm,self).clean()
 
 class ProfileForm(forms.ModelForm):

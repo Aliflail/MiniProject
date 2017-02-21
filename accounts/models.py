@@ -91,7 +91,7 @@ class Profile(models.Model):
     status = models.CharField(max_length=2, choices=choice, default='ST')
     standard=models.CharField(max_length=5,default="CSA")
     name=models.CharField(max_length=14,unique=True)
-    slug=models.SlugField(max_length=14,default="bineta")
+    slug=models.SlugField(max_length=14)
     def _str_(self):
         return self.user.email
 

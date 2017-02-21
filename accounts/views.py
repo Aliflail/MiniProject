@@ -7,6 +7,7 @@ from accounts.forms import LoginForm
 from django.contrib.auth import get_user_model
 from .models import Profile
 from django.template.defaultfilters import slugify
+from django.contrib.auth.decorators import login_required
 user =get_user_model()
 # Create your views here.
 class Indexpage(View):
@@ -64,6 +65,10 @@ class Homepage(View):
 def logoutview(request):
     logout(request)
     return redirect('/')
+    from django.contrib.auth.decorators import login_required
+
+@login_required(redirect_field_name='redirecting',login_url='')
+
 def profileview(request,slug):
     p = Profile.objects.get(slug=slug)
     return render(request,'profile.html',{"profile":p})
