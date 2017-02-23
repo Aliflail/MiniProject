@@ -1,0 +1,150 @@
+$length: 200px
+$border-length: 20px
+$time: 15s
+$font: 30px
+$grey: #d8d0c0
+*
+	//border: 1px black solid
+.frontpage
+	.main
+		background: url(http://www.impublications.com/sites/default/files/books.jpg)
+		background-attachment: fixed
+		background-repeat: no-repeat
+		background-position: center
+		background-size: cover
+		height: 100vh
+		.header
+			position: absolute
+			top: 200px
+			background-color: white
+			.pageheader
+				font-size: 100px
+				background: url(http://www.impublications.com/sites/default/files/books.jpg)
+				background-attachment: fixed
+				background-repeat: no-repeat
+				background-position: center
+				background-size: cover
+				-webkit-background-clip: text
+				-webkit-text-fill-color: transparent
+				text-transform: uppercase
+			
+	.login
+		background: white
+		height: 100vh
+		.loginform > *
+			padding: 20px
+		.loginform
+			margin-top: 15vh
+			padding-top: 5vh
+			padding-bottom: 5vh
+			background-color: $grey
+		.l
+			background-color: white
+			margin-bottom: 20px
+	
+// animation of loader
+
+.aa
+	height: 300px
+	margin-top: 200px
+	text-align: center
+	.cap
+		margin-top: 50px
+.a
+	position: relative
+	left: 50%
+	top: 100px
+	transform: translate(-50%,-50%)
+	height: $length
+	width: $length
+	padding: 10px
+	border-radius: 50%
+	text-align: center
+	font-size: $font
+	box-sizing: border-box
+	padding-top: $length/2-$font
+	user-select: none
+	&:before , &:after
+		content: ""
+		height: $length
+		width: $length
+		border-radius: 50%
+	img
+		height: $length/1.5
+		width: $length/1.5
+		transform: translateY(-35%)
+		border-radius: 50%
+.b:after
+	position: absolute
+	top: 0px //-$border-length
+	left: 0px //$border-length
+	border: $border-length solid transparent
+	border-bottom-color: blue
+	border-top-color: blue
+	animation: spins $time ease-in-out infinite 
+.b:before
+	position: absolute
+	top: 0px //$border-length
+	left: 0px //$border-length
+	border: $border-length solid transparent
+	border-right-color: red
+	border-left-color: red
+	animation: spin $time ease-in-out infinite 
+.b.paused:before
+	animation-play-state: paused
+.b.paused:after
+	animation-play-state: paused 
+@keyframes spins
+	0%
+		transform: rotate(0deg) scale(1)
+	25%
+		transform: rotate(0deg) scale(1)
+	50%
+		transform: rotate(360deg) scale(1.3)
+	75%
+		transform: rotate(360deg) scale(1.3)
+	100%
+		transform: rotate(720deg) scale(1)
+@keyframes spin
+	0%
+		transform: rotate(0deg) scale(1)
+	25%
+		transform: rotate(360deg) scale(1.3)
+	50%
+		transform: rotate(360deg) scale(1.3)
+	75%
+		transform: rotate(720deg) scale(1)
+	100%
+		transform: rotate(720deg) scale(1)
+@keyframes cols
+	0%,100%
+		color: red
+	25%
+		color: green
+	50%
+		color: blue
+	75%
+		color: yellow
+.paused
+	animation-play-state: paused
+.registration
+	margin-top: 100px
+	*
+		margin-bottom: 10px
+.side
+	background-color: #DBFFB3
+	height: 20vh
+	h2
+		text-transform: capitalize
+	.nav-pills>li>a:hover
+		background-color: white
+.rightside
+	height: 90vh
+	background-color: orange
+.navpagination
+	position: absolute
+	bottom: 20px
+	left: 50%
+	transform: translate(-50%,0%)
+.firstnav
+	opacity: 0.4
