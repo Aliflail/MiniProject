@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 {% block body %}
-{% if user.is_authenticated %}
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,6 +28,7 @@
 
 
 <div class="col-md-3 col-md-offset-1  side">
+    <img src="{{profile.image.url }}" alt="" class="img-responsive img-circle img-thumbnail pimage">
     <h2><span class="glyphicon glyphicon-user" aria-hidden="true">{{profile.name}}</span></h2>
     <ul class="nav nav-pills nav-stacked">
         <li role="presentation"><a href="#">Results</a></li>
@@ -81,8 +80,4 @@
 
 </div>
 
-
-{% else %}
-<h4>pls login</h4>
-{% endif %}
 {% endblock %}

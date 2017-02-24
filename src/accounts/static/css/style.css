@@ -129,8 +129,11 @@
     margin-bottom: 10px; }
 
 .side {
-  background-color: #DBFFB3;
-  height: 20vh; }
+  background-color: #DBFFB3; }
+  .side .pimage {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%); }
   .side h2 {
     text-transform: capitalize; }
   .side .nav-pills > li > a:hover {

@@ -4,7 +4,6 @@ from django.contrib.auth.models import (
 )
 from django.conf import settings
 from django.db.models.signals import post_save
-
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
         """
@@ -87,6 +86,7 @@ class Profile(models.Model):
         ('TC', 'Training_Cell'),
         ('ST', 'Student'),
     )
+    image= models.FileField(default='profile-pics-17.png')
     status = models.CharField(max_length=2, choices=choice, default='ST')
     standard=models.CharField(max_length=5,default="CSA")
     name=models.CharField(max_length=14,unique=True)

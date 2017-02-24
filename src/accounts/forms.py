@@ -21,5 +21,5 @@ class ProfileForm(forms.ModelForm):
     name=forms.CharField(max_length=14,widget=forms.TextInput(attrs={"class":"form-control"}))
     class Meta:
         model= Profile
-        fields=['admissionno','name','status']
+        fields=['admissionno','name','image','status']
 
