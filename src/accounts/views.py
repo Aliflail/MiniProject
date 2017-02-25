@@ -9,6 +9,7 @@ from .models import Profile
 from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.http import JsonResponse
 user =get_user_model()
 # Create your views here.
 class Indexpage(View):
@@ -75,3 +76,12 @@ def logoutview(request):
 def profileview(request,slug):
     p = Profile.objects.get(slug=slug)
     return render(request,'profile.html',{"profile":p})
+
+
+
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': Profile.objects.filter(name=username).exists()
+    }
+    return JsonResponse(data)
