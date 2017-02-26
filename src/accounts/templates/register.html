@@ -1,8 +1,10 @@
   {% extends 'base.html' %}
+  {% block title %} Register {% endblock %}
 {% block body %}
+
 <div class="jumbotron col-md-5 col-md-offset-3 registration ">
     <label><h2>Registion Form</h2></label>
-    <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+    <form action="." method="post" enctype="multipart/form-data" data-validate-username-url="{% url 'accounts:validateusername' %}" >{% csrf_token %}
              {% if form.form.non_field_errors or profile.name.errors  %}
             <div class="alert alert-danger" role="alert">
             {{ form.non_field_errors }}

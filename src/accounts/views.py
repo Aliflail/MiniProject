@@ -80,8 +80,10 @@ def profileview(request,slug):
 
 
 def validate_username(request):
-    username = request.GET.get('username', None)
+    username = request.GET.get('name', None)
     data = {
-        'is_taken': Profile.objects.filter(name=username).exists()
+        'is_taken': Profile.objects.filter(name__iexact=username).exists()
     }
+    if data['is_taken']:
+        data['error_message'] = 'A user with this username already exists.'
     return JsonResponse(data)

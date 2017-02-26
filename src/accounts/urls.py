@@ -8,5 +8,5 @@ urlpatterns=[
     url(r'^profile/(?P<slug>[\w-]+)/$',views.profileview,name="profile"),
     url(r'^home/',views.Homepage.as_view(),name="home"),
     url(r'^logout/',views.logoutview,name="logout"),
-    url(r'^register/validate_username',views.validate_username,name="validateusername"),
+    url(r'^validate_username',views.validate_username,name="validateusername"),
 ]
