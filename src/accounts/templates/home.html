@@ -41,40 +41,33 @@
 <div class="col-md-6 col-md-offset-1 jumbotron rightside ">
 
 
-    <div class="panel panel-default">
+<!--these contacts are really tests im too lazy to change the names-->
+
+    {% for contact in contacts %}
+     <div class="panel panel-default">
       <div class="panel-body">
-        Tests Should be put Here
+          <a href="{% url 'test' contact.id %}">{{ contact.name}}</a>
+
+
       </div>
     </div>
-        <div class="panel panel-default">
-      <div class="panel-body">
-        Tests Should be put Here
-      </div>
+    {% endfor %}
+
+    <div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
     </div>
-        <div class="panel panel-default">
-      <div class="panel-body">
-        Tests Should be put Here
-      </div>
-    </div>
-    <nav aria-label="Page navigation" class="navpagination">
-      <ul class="pagination">
-        <li>
-          <a href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-          <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
 
 
 

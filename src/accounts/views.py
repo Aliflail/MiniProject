@@ -10,6 +10,10 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.http import JsonResponse
+from tests.models import Apt_Test
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import pdb
+
 user =get_user_model()
 # Create your views here.
 class Indexpage(View):
@@ -65,7 +69,21 @@ class Homepage(View):
     template_name='home.html'
     def get(self,request,*args):
         p=Profile.objects.get(user=request.user)
-        return render(request,self.template_name,{"profile":p})
+
+        #paginatior code these contacts are really tests im too lazy to change the names
+        contact_list = Apt_Test.objects.all()
+        paginator = Paginator(contact_list, 25)
+        page = request.GET.get('page')
+        try:
+            contacts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            contacts = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            contacts = paginator.page(paginator.num_pages)
+
+        return render(request,self.template_name,{"profile":p,'contacts': contacts})
 def logoutview(request):
     logout(request)
     return redirect('/')
