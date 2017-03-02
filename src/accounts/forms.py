@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate, login ,logout,get_user_model
 from .models import Profile
+from tests import models
 User=get_user_model()
 class LoginForm(forms.Form):
     email=forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -22,4 +23,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model= Profile
         fields=['admissionno','name','image','status']
-
+class TestForm(forms.ModelForm):
+    class Meta:
+        model=models.Apt_Test
+        fields=['time','name','startDate','endDate']
