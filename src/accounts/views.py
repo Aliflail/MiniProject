@@ -72,7 +72,8 @@ class Homepage(View):
         if not request.user.is_authenticated:
             return redirect(reverse("accounts:index"))
         p=Profile.objects.get(user=request.user)
-        if p.status!='Student':
+
+        if p.status != 'ST':
             return render(request,self.tctemplate,{})
         #paginatior code these contacts are really tests im too lazy to change the names
         contact_list = Apt_Test.objects.all()
