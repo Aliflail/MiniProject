@@ -42,7 +42,7 @@ class Registerpage(View):
 
     def post(self, request, *args):
         form = UserCreationForm(request.POST)
-        profile = ProfileForm(request.POST)
+        profile = ProfileForm(request.POST,request.FILES)
         context = {
             "form": form,
             "profile":profile,
