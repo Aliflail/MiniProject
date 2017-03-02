@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load crispy_forms_tags %}
+
+<a href="{% url 'accounts:logout'%}">Logout</a>
+<h1>Create Test</h1>
+.jumbotron.col-md-5.col-md-offset
+    <form action="." method="post">
+    {{tform | crispy}}
+        <input type="submit">
+    </form>
+
+
+{% endblock%}

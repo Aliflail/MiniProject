@@ -1,0 +1,33 @@
+    {% extends 'base.html' %}
+    {% block title %} {{test}} {% endblock %}
+    {% block body %}
+    <h3>There are no negative marks so attempt all questions</h3>
+    <ol>
+    {% for q in test.apt_qns_set.all %}
+
+         <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                        <li>{{ q }}</li>
+                </h3>
+              </div>
+             <form method="post" action=".">{% csrf_token %}
+
+                 <div class="panel-body">
+                        {{error}}
+                        <div class="panel-body">
+                        {% for a in q.answers_set.all %}
+                                <input type="hidden" name="question" value="{{ q.id }}"/>
+                                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ a.id }}" />
+                            {{ a }}
+                        {% endfor %}
+                         </div>
+                     <input type="submit" value="submit"/>
+                 </div>
+            </form>
+         </div>
+
+    {% endfor %}
+    </ol>
+
+    {% endblock %}
