@@ -7,42 +7,6 @@ from django.contrib.auth import get_user_model
 # Create your views here.
 user=get_user_model()
 
-# class testpage(View):
-#     template_name="tests.html"
-#     def get(self,request,test_id):
-#         test=get_object_or_404(Apt_Test,pk=test_id)
-#
-#         context={
-#             "test":test
-#         }
-#         return render(request,self.template_name,context)
-#     def post(self,request,test_id):
-#         test = get_object_or_404(Apt_Test, pk=test_id)
-#         if Testscore.objects.filter(user=request.user).exists():
-#             score = Testscore.objects.get(user=request.user, test=test)
-#         else:
-#             score = Testscore.objects.create(user=request.user, test=test)
-#         try:
-#             q = test.apt_qns_set.get(pk=request.POST['question'])
-#             selected_choice = q.answers_set.get(pk=request.POST['choice'])
-#         except(KeyError,Answers.DoesNotExist):
-#             context = {
-#                 "t": test,
-#                 "error": "you didnt select a choice"
-#             }
-#             return render(request, self.template_name, context)
-#         else:
-#             if selected_choice.correct_set.filter(pk=request.POST['choice']).exists() :
-#
-#                 if q.correct_set.get(pk=request.POST['question']) == selected_choice.correct_set.get(pk=request.POST['choice']):
-#                     score.score += 1
-#                     score.save()
-#                     return HttpResponseRedirect(reverse('test', args=(test_id)))
-#
-#             else:
-#                 return HttpResponseRedirect(reverse('test', args=(test_id)))
-
-
 class testpage(View):
     template_name = "test.html"
 
@@ -95,7 +59,7 @@ class resultpage(View):
     template_name="results.html"
     def get(self,request,test_id):
         test = get_object_or_404(Apt_Test, pk=test_id)
-        score = get_object_or_404(Testscore, test=test)
+        score = get_object_or_404(Testscore, test=test,user=request.user)
         context={
             "score":score,
         }

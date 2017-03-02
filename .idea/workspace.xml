@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f82e7c2c-8886-48ac-9971-54eb7e6f794e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/admin.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/apps.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/migrations/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/models.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/templates/results.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/templates/test.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/templates/tests.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/urls.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tests/views.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/accounts/tests.py" afterPath="$PROJECT_DIR$/src/tests/tests.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local" afterPath="$PROJECT_DIR$/local" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TestMaker/settings.py" afterPath="$PROJECT_DIR$/src/TestMaker/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TestMaker/urls.py" afterPath="$PROJECT_DIR$/src/TestMaker/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/accounts/templates/home.html" afterPath="$PROJECT_DIR$/src/accounts/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/accounts/views.py" afterPath="$PROJECT_DIR$/src/accounts/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db.sqlite3" afterPath="$PROJECT_DIR$/src/db.sqlite3" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -522,7 +503,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26949906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13239075" sideWeight="0.4977806" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.59383035" sideWeight="0.4977806" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24984147" sideWeight="0.5079681" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
