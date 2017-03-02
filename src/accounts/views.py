@@ -2,17 +2,16 @@ from django.shortcuts import render,redirect,get_object_or_404,HttpResponse,Http
 from django.views import View
 from accounts.admin import UserCreationForm
 from django.contrib.auth import authenticate, login ,logout
-from .forms import ProfileForm,TestForm
+from .forms import ProfileForm,TestForm,QuestionForm,AnswerForm
 from accounts.forms import LoginForm
 from django.contrib.auth import get_user_model
 from .models import Profile
 from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from django.http import JsonResponse
 from tests.models import Apt_Test
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import pdb
+
 from django.urls import reverse ,reverse_lazy
 user =get_user_model()
 # Create your views here.
@@ -91,12 +90,26 @@ class Homepage(View):
         return render(request,self.template_name,{"profile":p,'contacts': contacts})
 class createtest(View):
     createtestt="createtest.html"
+
     def get(self,request):
         return render(request,self.createtestt,{"tform":TestForm()})
+    def post(self,request):
+        t =TestForm(request.POST)
+
+        if t.is_valid():
+            object=t.save()
+            form=QuestionForm({"test_id":object.id})
+
+            return render(request,'createquestions.html',{"form":form,"answers":a})
+
+class createquestion(View):
+    pass
+
+
 def logoutview(request):
     logout(request)
     return redirect('/')
-    from django.contrib.auth.decorators import login_required
+
 
 @login_required(redirect_field_name='redirecting',login_url='')
 

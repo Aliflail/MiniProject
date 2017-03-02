@@ -3,10 +3,11 @@
 {% load crispy_forms_tags %}
 
 <a href="{% url 'accounts:logout'%}">Logout</a>
-<div class="col-md-offset-2"><h1>Create Test</h1></div>
+<div class="col-md-offset-2"><h1>Create Questions</h1></div>
 <div class="jumbotron col-md-3 col-md-offset-2">
-    <form action="." method="post">{% csrf_token %}
-        {{tform | crispy}}
+    <form action="{% url 'accounts:createquestion' %}" method="post">{% csrf_token %}
+        {{form.question}}
+        {{answers}}
         <input type="submit">
     </form>
 
