@@ -2,3 +2,10 @@
 
 find . -name \*.pyc -delete
 
+# Django Recommended
+*.egg-info
+*.pot
+*.py[co]
+__pycache__
+src/accounts/media/
+src/db.sqlite3
