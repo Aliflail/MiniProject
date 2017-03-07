@@ -1,33 +1,53 @@
-    {% extends 'base.html' %}
-    {% block title %} {{test}} {% endblock %}
-    {% block body %}
-    <h3>There are no negative marks so attempt all questions</h3>
+{% extends 'base.html' %}
+{% block title %} {{test}} {% endblock %}
+{% block body %}
+<noscript>
+    PLease enable javascript
+</noscript>
+<h3>There are no negative marks so attempt all questions </h3>
+<h1>{{request.session.time.total_seconds}}</h1>
+<div  id="time"></div>
+<div class="col-md-3 col-md-offset-2 jumbotron">
+<div id="clock"></div>
+</div>
+
+ <div class="panel panel-default col-md-6 col-md-offset-2">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+                <li>{{ q }}</li>
+        </h3>
+      </div>
+     <form method="post" action=".">{% csrf_token %}
+
+         <div class="panel-body">
+                {{error}}
+                <div class="panel-body">
+                {% for a in q.answers_set.all %}
+                        <input type="hidden" name="question" value="{{ q.id }}"/>
+                        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ a.id }}" />
+                    {{ a }}
+                {% endfor %}
+                 </div>
+             <input type="submit" value="submit"/>
+         </div>
+    </form>
+ </div>
 
 
 
-     <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-                    <li>{{ q }}</li>
-            </h3>
-          </div>
-         <form method="post" action=".">{% csrf_token %}
 
-             <div class="panel-body">
-                    {{error}}
-                    <div class="panel-body">
-                    {% for a in q.answers_set.all %}
-                            <input type="hidden" name="question" value="{{ q.id }}"/>
-                            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ a.id }}" />
-                        {{ a }}
-                    {% endfor %}
-                     </div>
-                 <input type="submit" value="submit"/>
-             </div>
-        </form>
-     </div>
+{% endblock %}
+{% block jquery %}
+d=new Date()
+d.new Date()
+$('div#clock').countdown(, function(event) {
+    var format = '%H:%M:%S';
+    $(this).text(
+      event.strftime(format)
+    ).on('finish.countdown', function(event) {
+  $(this).html('This test is finished has expired!')
+    .parent().addClass('disabled');
 
-
-
-
-    {% endblock %}
+});
+  });
+{% endblock %}

@@ -1,8 +1,8 @@
-from django.shortcuts import render,redirect,get_object_or_404,HttpResponse,HttpResponseRedirect
+from django.shortcuts import render,redirect,get_object_or_404,HttpResponseRedirect
 from django.views import View
 from accounts.admin import UserCreationForm
 from django.contrib.auth import authenticate, login ,logout
-from .forms import ProfileForm,TestForm,QuestionForm,AnswerForm
+from .forms import ProfileForm
 from accounts.forms import LoginForm
 from django.contrib.auth import get_user_model
 from .models import Profile
@@ -76,7 +76,7 @@ class Homepage(View):
             return render(request,self.tctemplate,{})
         #paginatior code these contacts are really tests im too lazy to change the names
         contact_list = Apt_Test.objects.all()
-        paginator = Paginator(contact_list, 25)
+        paginator = Paginator(contact_list, 5)
         page = request.GET.get('page')
         try:
             contacts = paginator.page(page)
@@ -88,22 +88,6 @@ class Homepage(View):
             contacts = paginator.page(paginator.num_pages)
 
         return render(request,self.template_name,{"profile":p,'contacts': contacts})
-class createtest(View):
-    createtestt="createtest.html"
-
-    def get(self,request):
-        return render(request,self.createtestt,{"tform":TestForm()})
-    def post(self,request):
-        t =TestForm(request.POST)
-
-        if t.is_valid():
-            object=t.save()
-            form=QuestionForm({"test_id":object.id})
-
-            return render(request,'createquestions.html',{"form":form,"answers":a})
-
-class createquestion(View):
-    pass
 
 
 def logoutview(request):

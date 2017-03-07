@@ -1,3 +1,4 @@
 *.pyc
-find . -name "*.pyc" -exec rm -rf {} \;
+
 find . -name \*.pyc -delete
+

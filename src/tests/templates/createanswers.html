@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="col-md-8 col-md-offset-2 jumbotron">
+    <h3>Answer<span class="label label-primary">form</span></h3>
+    <form action="." method="post">{% csrf_token %}
+        {{aform | crispy}}
+
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}

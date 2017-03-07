@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load crispy_forms_tags %}
+
+<a href="{% url 'accounts:logout'%}">Logout</a>
+<div class="col-md-offset-2"><h1>Create Questions for  {{object}}</h1></div>
+<div class="box">
+	</div>
+<div class="jumbotron col-md-3 col-md-offset-2">
+    <form action="." method="post">{% csrf_token %}
+        <label for="">Question</label>
+        {{qform|crispy}}
+
+        <input type="submit">
+    </form>
+</div>
+{% endblock%}

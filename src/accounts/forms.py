@@ -23,15 +23,3 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model= Profile
         fields=['admissionno','name','image','status']
-class TestForm(forms.ModelForm):
-    class Meta:
-        model=models.Apt_Test
-        fields=['time','name','startDate','endDate']
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model=models.Apt_Qns
-        fields=['question','test_id']
-class AnswerForm(forms.ModelForm):
-    class Meta:
-        model=models.Answers
-        fields=['answer','qn_id']

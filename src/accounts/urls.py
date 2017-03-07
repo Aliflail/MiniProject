@@ -9,6 +9,5 @@ urlpatterns=[
     url(r'^home/',views.Homepage.as_view(),name="home"),
     url(r'^logout/',views.logoutview,name="logout"),
     url(r'^validate_username',views.validate_username,name="validateusername"),
-    url(r'^createtest/',views.createtest.as_view(),name="createtest"),
-    url(r'^createquestion/', views.createquestion.as_view(), name="createquestion"),
+
 ]

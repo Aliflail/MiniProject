@@ -1,5 +1,7 @@
-$(function(){    
+$(function(){
+    if (document.querySelector("input#id_name")){
     document.querySelector("input#id_name").setAttribute("autocomplete","off");
+    }
       $('*').bind('click',function(){
         $('.a').toggleClass("paused");            
     });

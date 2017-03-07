@@ -11,13 +11,27 @@
 	<link rel='stylesheet' href='{% static "css/style.css"%}'>
 </head>
 </head>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
 	{% block body %}
 	{% endblock %}
 
 	<footer> <script src="{% static  'bower_components/jquery/dist/jquery.js' %}"></script>
 		<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.js' %}" crossorigin="anonymous"></script>
+		<script src="{% static 'bower_components/jquery.countdown/dist/jquery.countdown.js' %}																			"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
        <script src="{% static 'js/main.js' %}"></script>
+		<script type="text/javascript">
+			$(function(){
+			{% block jquery %}{% endblock %}
+			});
+		</script>
 	</footer>
 
 </html>

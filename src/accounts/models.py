@@ -86,7 +86,7 @@ class Profile(models.Model):
         ('TC', 'Training_Cell'),
         ('ST', 'Student'),
     )
-    image= models.FileField(default='profile-pics-17.png')
+    image= models.FileField(default='user.png')
     status = models.CharField(max_length=2, choices=choice, default='ST')
     standard=models.CharField(max_length=5,default="CSA")
     name=models.CharField(max_length=14,unique=True)
