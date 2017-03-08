@@ -6,17 +6,7 @@ from django.contrib.auth import get_user_model
 from .forms import TestForm,QuestionForm,AnswerForm,checkedAnswerform
 from django.http import HttpResponseNotAllowed
 from django.contrib import messages
-import json
-import datetime
-from time import mktime
-
-class MyEncoder(json.JSONEncoder):
-
-    def default(self, obj):
-        if isinstance(obj, datetime.datetime):
-            return int(mktime(obj.timetuple()))
-
-        return json.JSONEncoder.default(self, obj)
+from datetime import timedelta
 # Create your views here.
 user=get_user_model()
 
@@ -83,18 +73,15 @@ class testpage(View):
 
         if not Testscore.objects.filter(user=request.user,test=test).exists():
             score = Testscore.objects.create(user=request.user, test=test)
-
-            request.session['time'] = json.dumps(test.time, cls=MyEncoder)
             request.session['Testscore_question']=score.question
-
-            print request.session['time']
-
+            score.itime=  test.time
+        else:
+            score=Testscore.objects.get(user=request.user, test=test)
         if request.session.has_key('Testscore_question') and  test.apt_qns_set.filter(pk=request.session['Testscore_question']).exists():
             q=test.apt_qns_set.get(pk=request.session['Testscore_question'])
-
             context = {
                 "q": q,
-                "atest":request.session['time']
+                "atest":score
             }
         else:
             return HttpResponseRedirect(reverse('result',args=(test_id)))
@@ -109,7 +96,9 @@ class testpage(View):
 
         try:
             q=test.apt_qns_set.get(pk=request.session['Testscore_question'])
-            selected_choice = q.answers_set.get(pk=request.POST['choice'])
+            print request.POST['time']
+            score.itime=timedelta(seconds=int(request.POST['time']))
+            selectedchoice = q.answers_set.get(pk=request.POST['choice'])
         except(KeyError, Answers.DoesNotExist):
             context = {
                 "t": test,
@@ -117,8 +106,7 @@ class testpage(View):
             }
             return render(request, self.template_name, context)
         else:
-            print(request.POST['choice'])
-            if selected_choice.correct_set.all().exists():
+            if selectedchoice.correct_set.all().exists():
                 score.score += 1
                 request.session['Testscore_question']+=1
                 score.save()

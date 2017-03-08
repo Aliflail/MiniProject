@@ -3,10 +3,10 @@ from datetime import datetime
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.db import models
-
+from datetime import timedelta
 # Create your models here.
 class Apt_Test(models.Model):
-   time = models.DurationField()
+   time = models.DurationField(default="1:00:00")
    name = models.CharField(max_length=100)
    startDate = models.DateField(default=datetime.now)
    endDate=models.DateField(default=datetime.now)
@@ -39,6 +39,7 @@ class Testscore(models.Model):
     test=models.ForeignKey(Apt_Test,on_delete=models.CASCADE)
     score=models.IntegerField(default=0)
     question=models.IntegerField(default=1)
+    itime=models.DurationField(default=timedelta(hours=1))
     def _str_(self):
         return self.user.email
 

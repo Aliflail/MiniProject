@@ -5,8 +5,8 @@
     PLease enable javascript
 </noscript>
 <h3>There are no negative marks so attempt all questions </h3>
-<h1>{{request.session.time.total_seconds}}</h1>
-<div  id="time"></div>
+<div  id="time" data-time="{{atest.itime.total_seconds}}"></div>
+
 <div class="col-md-3 col-md-offset-2 jumbotron">
 <div id="clock"></div>
 </div>
@@ -21,9 +21,10 @@
 
          <div class="panel-body">
                 {{error}}
+              <input type="hidden" name="time" id="timervariable">
                 <div class="panel-body">
                 {% for a in q.answers_set.all %}
-                        <input type="hidden" name="question" value="{{ q.id }}"/>
+
                         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ a.id }}" />
                     {{ a }}
                 {% endfor %}
@@ -38,16 +39,38 @@
 
 {% endblock %}
 {% block jquery %}
-d=new Date()
-d.new Date()
-$('div#clock').countdown(, function(event) {
-    var format = '%H:%M:%S';
-    $(this).text(
-      event.strftime(format)
-    ).on('finish.countdown', function(event) {
-  $(this).html('This test is finished has expired!')
-    .parent().addClass('disabled');
+d= new Date();
 
-});
+$time=$("#time");
+$Time=$time.attr("data-time");
+$seconds=$Time%60;
+$minutes=($Time/60)%60;
+$hours=$Time/3600;
+$timer=$('#timervariable');
+d.setSeconds(d.getSeconds()+$seconds)
+d.setHours(d.getHours()+$hours)
+d.setMinutes(d.getMinutes()+$minutes)
+
+
+
+$('div#clock').countdown(d, function(event) {
+    var format = '%H:%M:%S';
+    $(this).text(event.strftime(format))
+        .on('finish.countdown', function(event) {
+            //to logout session
+            $(this).html('This test is finished !')
+             .parent().addClass('disabled');
+    });
+
+
+
   });
+
+    $time.countdown(d).on('update.countdown', function(event) {
+                $Time=$Time-1;
+                $timer.val($Time);
+            console.log($timer.val());
+               }) .countdown('start');
+
+
 {% endblock %}

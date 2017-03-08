@@ -1,2 +1,0 @@
-Enter : Output: 55
-Hello world
