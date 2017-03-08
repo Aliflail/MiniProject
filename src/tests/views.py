@@ -7,6 +7,7 @@ from .forms import TestForm,QuestionForm,AnswerForm,checkedAnswerform
 from django.http import HttpResponseNotAllowed
 from django.contrib import messages
 from datetime import timedelta
+from django.http import JsonResponse
 # Create your views here.
 user=get_user_model()
 
@@ -74,14 +75,15 @@ class testpage(View):
         if not Testscore.objects.filter(user=request.user,test=test).exists():
             score = Testscore.objects.create(user=request.user, test=test)
             request.session['Testscore_question']=score.question
-            score.itime=  test.time
+            score.itime = test.time
         else:
             score=Testscore.objects.get(user=request.user, test=test)
         if request.session.has_key('Testscore_question') and  test.apt_qns_set.filter(pk=request.session['Testscore_question']).exists():
             q=test.apt_qns_set.get(pk=request.session['Testscore_question'])
             context = {
                 "q": q,
-                "atest":score
+                "atest":score,
+                "test_id":test_id
             }
         else:
             return HttpResponseRedirect(reverse('result',args=(test_id)))
@@ -201,3 +203,16 @@ class createanswer(View):
                         Correct.objects.create(ans_id=t, qn_id=q)
                     return redirect(reverse('createanswer'))
 
+
+def testexpire(request):
+    if not request.is_ajax() or not request.method == 'POST':
+        return HttpResponseNotAllowed(['POST'])
+    request.session['Testscore_question'] = 0
+    return HttpResponse('Sorry expired')
+def updatetime(request):
+    if not request.is_ajax() or not request.method == 'POST':
+        return HttpResponseNotAllowed(['POST'])
+    test = get_object_or_404(Apt_Test, pk=request.POST["test_id"])
+    score = Testscore.objects.get(user=request.user, test=test)
+    score.itime = timedelta(seconds=int(request.POST["timer"]))
+    return HttpResponse("ok")

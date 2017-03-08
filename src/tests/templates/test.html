@@ -51,8 +51,6 @@ d.setSeconds(d.getSeconds()+$seconds)
 d.setHours(d.getHours()+$hours)
 d.setMinutes(d.getMinutes()+$minutes)
 
-
-
 $('div#clock').countdown(d, function(event) {
     var format = '%H:%M:%S';
     $(this).text(event.strftime(format))
@@ -60,16 +58,21 @@ $('div#clock').countdown(d, function(event) {
             //to logout session
             $(this).html('This test is finished !')
              .parent().addClass('disabled');
-    });
+            $.post("{%url 'testexpire' %}",{csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},function(data,status){
+               window.location.replace("{% url 'result' test_id %}");
 
 
+            });
+
+});
 
   });
-
     $time.countdown(d).on('update.countdown', function(event) {
                 $Time=$Time-1;
                 $timer.val($Time);
-            console.log($timer.val());
+                 $.post("{%url 'updatetime' %}",{"timer":$timer.val(),"test_id":{{test_id}},csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+                function(data,status){
+            });
                }) .countdown('start');
 
 
