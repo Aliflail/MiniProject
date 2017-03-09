@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from tests.models import Apt_Test
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+# from . import models
 from django.urls import reverse ,reverse_lazy
 user =get_user_model()
 # Create your views here.

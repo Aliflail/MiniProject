@@ -35,7 +35,7 @@ class Correct(models.Model):
 
 
 class Testscore(models.Model):
-    user=models.OneToOneField(settings.AUTH_USER_MODEL)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     test=models.ForeignKey(Apt_Test,on_delete=models.CASCADE)
     score=models.IntegerField(default=0)
     question=models.IntegerField(default=1)
