@@ -2,6 +2,7 @@
   {% block title %} Register {% endblock %}
 {% block body %}
 
+
 <div class="jumbotron col-md-5 col-md-offset-3 registration ">
     <label><h2>Registion Form</h2></label>
     <form action="." method="post" enctype="multipart/form-data" data-validate-username-url="{% url 'accounts:validateusername' %}" >{% csrf_token %}

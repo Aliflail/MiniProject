@@ -7,8 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}Frontpage{% endblock %}</title>
 	<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.css' %}" crossorigin="anonymous">
+	<link rel="stylesheet" href='{% static "css/reg.css"%}'>
 
 	<link rel='stylesheet' href='{% static "css/style.css"%}'>
+
 </head>
 </head>
 	{% if messages %}
@@ -26,7 +28,8 @@
 		<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.js' %}" crossorigin="anonymous"></script>
 		<script src="{% static 'bower_components/jquery.countdown/dist/jquery.countdown.js' %}																			"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-       <script src="{% static 'js/main.js' %}"></script>
+       <script src="{% static 'js/main.js' %}"></script>\
+		<script src="{% static 'js/reg.js' %}"></script>
 		<script type="text/javascript">
 			$(function(){
 			{% block jquery %}{% endblock %}

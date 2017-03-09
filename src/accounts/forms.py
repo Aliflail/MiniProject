@@ -20,6 +20,7 @@ class LoginForm(forms.Form):
 class ProfileForm(forms.ModelForm):
     admissionno=forms.CharField(max_length=7,widget=forms.TextInput(attrs={"class":"form-control"}))
     name=forms.CharField(max_length=14,widget=forms.TextInput(attrs={"class":"form-control"}))
+    image=forms.FileField(widget=forms.FileInput(attrs={"type":"file" ,"accept":"image/*"," onchange":"loadFile(event)"}))
     class Meta:
         model= Profile
         fields=['admissionno','name','image','status']

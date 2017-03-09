@@ -31,7 +31,7 @@ class Indexpage(View):
                 return redirect('/home/')
         return render(request, self.template_name, {"form": form})
 class Registerpage(View):
-    template_name='register.html'
+    template_name='register2.html'
     def get(self, request, *args):
 
         form=UserCreationForm()
