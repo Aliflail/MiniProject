@@ -50,8 +50,6 @@ class Registerpage(View):
             "profile":profile,
 
         }
-
-
         if form.is_valid() and profile.is_valid():
             user = form.save()
             pro= profile.save(commit=False)
@@ -73,7 +71,8 @@ class Homepage(View):
         p=Profile.objects.get(user=request.user)
 
         if p.status != 'ST':
-            return render(request,self.tctemplate,{})
+            return render(request,self.tctemplate,{"profile":p,
+                                                   "homelink":"active"})
         #paginatior code these contacts are really tests im too lazy to change the names
         contact_list = Apt_Test.objects.all()
         paginator = Paginator(contact_list, 5)
@@ -99,7 +98,7 @@ def logoutview(request):
 
 def profileview(request,slug):
     p = Profile.objects.get(slug=slug)
-    return render(request,'profile.html',{"profile":p})
+    return render(request,'profile.html',{"profile":p,"profilelink":"active"})
 
 
 

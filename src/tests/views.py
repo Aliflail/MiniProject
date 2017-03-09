@@ -7,6 +7,7 @@ from .forms import TestForm,QuestionForm,AnswerForm,checkedAnswerform
 from django.http import HttpResponseNotAllowed
 from django.contrib import messages
 from datetime import timedelta
+from accounts import models
 from django.http import JsonResponse
 # Create your views here.
 user=get_user_model()
@@ -141,7 +142,9 @@ class createtest(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect(reverse("accounts:index"))
-        return render(request, self.createtestt, {"tform": TestForm()})
+        return render(request, self.createtestt, {"tform": TestForm(),
+                                                  "profile":models.Profile.objects.get(user=request.user),
+                                                  "createlink":"active"})
 
     def post(self, request):
         t = TestForm(request.POST)

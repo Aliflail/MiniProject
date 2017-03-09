@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
-tc pc page
-<a href="{% url 'createtest'%}">CreateTest</a>
-<a href="{% url 'accounts:logout'%}">Logout</a>
+
+{% include 'header.html' %}
+<div class="col-md-3 col-md-offset-1  side">
+    <img src="{{profile.image.url }}" alt="" class="img-responsive img-circle img-thumbnail pimage">
+    <h2><span class="glyphicon glyphicon-user" aria-hidden="true">{{profile.name}}</span></h2>
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation"><a href="#">Results</a></li>
+        <li role="presentation"><a href="#">Ranks</a></li>
+    </ul>
+
+
+</div>
+
+
 {% endblock%}
