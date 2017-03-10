@@ -12,59 +12,6 @@ from django.http import JsonResponse
 # Create your views here.
 user=get_user_model()
 
-# class testpage(View):
-#     template_name = "test.html"
-#
-#     def get(self, request, test_id):
-#         test = get_object_or_404(Apt_Test, pk=test_id)
-#
-#         if Testscore.objects.filter(user=request.user).exists():
-#             score = Testscore.objects.get(user=request.user, test=test)
-#             request.session['Testscore_question']=score.question
-#         else:
-#             score = Testscore.objects.create(user=request.user, test=test)
-#             request.session['Testscore_question']=score.question
-#         if test.apt_qns_set.filter(pk=score.question).exists():
-#             q=test.apt_qns_set.get(pk=request.session[['Testscore_question']])
-#             context = {
-#                 "q": q,
-#                 "atest":test
-#             }
-#         else:
-#             return HttpResponseRedirect(reverse('result',args=(test_id)))
-#         return render(request, self.template_name, context)
-#
-#     def post(self, request, test_id):
-#         test = get_object_or_404(Apt_Test, pk=test_id)
-#         if Testscore.objects.filter(user=request.user).exists():
-#             score = Testscore.objects.get(user=request.user, test=test)
-#         else:
-#             score = Testscore.objects.create(user=request.user, test=test)
-#
-#         try:
-#             q=test.apt_qns_set.get(pk=score.question)
-#             selected_choice = q.answers_set.get(pk=request.POST['choice'])
-#         except(KeyError, Answers.DoesNotExist):
-#             context = {
-#                 "t": test,
-#                 "error": "you didnt select a choice"
-#             }
-#             return render(request, self.template_name, context)
-#         else:
-#             print(request.POST['choice'])
-#             if selected_choice.correct_set.all().exists():
-#                 score.score += 1
-#                 score.question+=1
-#                 score.save()
-#                 return HttpResponseRedirect(reverse('test', args=(test_id)))
-#
-#             else:
-#
-#                 score.question+=1
-#                 score.save()
-#                 return HttpResponseRedirect(reverse('test', args=(test_id)))
-
-
 class testpage(View):
     template_name = "test.html"
 

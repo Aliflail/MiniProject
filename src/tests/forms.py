@@ -12,7 +12,6 @@ class QuestionForm(forms.ModelForm):
 
 
 class AnswerForm(forms.ModelForm):
-
     class Meta:
         model=models.Answers
         fields=['answer','qn_id']
