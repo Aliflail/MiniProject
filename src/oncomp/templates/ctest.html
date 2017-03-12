@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+<div  id="time2" data-time="{{ctest.itime.total_seconds}}"></div>
 <div class="panel panel-default col-md-9 col-md-offset-1">
     <div class="panel-heading">{{q}}</div>
     <div class="panel-body">{{q.prog}}</div>
   </div>
+<div id="clock2"></div>
 <form action="." method="POST">{% csrf_token %}
     <div class=" col-md-3 col-md-offset-1">
         {{ form.errors }}
         {{ form.non_field_errors }}
-
+ <input type="hidden" name="time" id="timervariable2">
       {{form.language|as_crispy_field}}</div>
     <div class="col-md-9 col-md-offset-1 ">
 
@@ -33,9 +35,54 @@ editor.getSession().setValue(textarea.val());
 editor.getSession().on('change', function(){
 textarea.val(editor.getSession().getValue());
 });
+editor.setOptions({
+  fontFamily: "monospace",
+  fontSize: "15pt"
+});
+
 $language=$('#id_language');
 $language.change(function(){
     editor.getSession().setMode("ace/mode/"+$(this).val());
 });
+
+d= new Date();
+
+$time=$("#time2");
+$Time=$time.attr("data-time");
+$seconds=$Time%60;
+$minutes=($Time/60)%60;
+$hours=$Time/3600;
+$timer=$('#timervariable2');
+d.setSeconds(d.getSeconds()+$seconds)
+d.setHours(d.getHours()+$hours)
+d.setMinutes(d.getMinutes()+$minutes)
+
+$('div#clock2').countdown(d, function(event) {
+    var format = '%H:%M:%S';
+    $(this).text(event.strftime(format))
+        .on('finish.countdown', function(event) {
+            //to logout session
+            $(this).html('This test is finished !')
+             .parent().addClass('disabled');
+            $.post("{%url 'oncomp:ctestexpire' %}",{csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},function(data,status){
+               window.location.replace("{% url 'result' ctest_id %}");
+
+
+            });
+
+});
+
+  });
+    $time.countdown(d).on('update.countdown', function(event) {
+                $Time=$Time-1;
+                $timer.val($Time);
+                 $.post("{%url 'oncomp:cupdatetime' %}",{"timer":$timer.val(),"ctest_id":{{ctest_id}},csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value},
+                function(data,status){
+                 });
+               }) .countdown('start');
+
+
+
+
 
 {% endblock %}
