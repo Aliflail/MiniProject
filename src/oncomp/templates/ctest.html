@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="panel panel-default col-md-9 col-md-offset-1">
+    <div class="panel-heading">{{q}}</div>
+    <div class="panel-body">{{q.prog}}</div>
+  </div>
+<form action="." method="POST">{% csrf_token %}
+    <div class=" col-md-3 col-md-offset-1">
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+
+      {{form.language|as_crispy_field}}</div>
+    <div class="col-md-9 col-md-offset-1 ">
+
+    {{form.program}}
+        <button class="btn btn-primary" type="submit" id="progsub">Compile</button>
+    </div>
+
+</form>
+<div class="col-md-9 col-md-offset-1 ">
+  <div id="editor" ></div>
+</div>
+
+{% endblock %}
+{% block jquery %}
+var editor =$('#editor');
+var textarea=$('#id_program');
+$form =$('#progsub').closest("form")
+editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setValue(textarea.val());
+editor.getSession().on('change', function(){
+textarea.val(editor.getSession().getValue());
+});
+$language=$('#id_language');
+$language.change(function(){
+    editor.getSession().setMode("ace/mode/"+$(this).val());
+});
+
+{% endblock %}

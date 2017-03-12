@@ -3,13 +3,13 @@ from datetime import datetime
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.db import models
-from datetime import timedelta
+from datetime import timedelta,datetime
 # Create your models here.
 class Apt_Test(models.Model):
    time = models.DurationField(default="1:00:00")
    name = models.CharField(max_length=100)
-   startDate = models.DateField(default=datetime.now)
-   endDate=models.DateField(default=datetime.now)
+   startDate = models.DateTimeField(default=(datetime.now()+timedelta(days=1)))
+   endDate=models.DateTimeField(default=datetime.now)
 
    def __str__(self):
        return self.name

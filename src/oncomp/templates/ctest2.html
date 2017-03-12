@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="panel panel-default col-md-9 col-md-offset-1">
+    <div class="panel-heading">{{q}}</div>
+    <div class="panel-body">{{q.prog}}</div>
+  </div>
+<form action="." method="post">{% csrf_token %}
+    <div class=" col-md-3 col-md-offset-1">
+        {{form|crispy}}
+
+        <button class="btn btn-primary" type="submit" id="progsub">Submit</button>
+    </div>
+
+</form>
+
+{% endblock %}
+{% block jquery %}
+var editor =$('#editor');
+var textarea=$('#id_program');
+$form =$('#progsub').closest("form")
+editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setValue(textarea.val());
+editor.getSession().on('change', function(){
+textarea.val(editor.getSession().getValue());
+});
+$language=$('#id_language');
+$language.change(function(){
+    editor.getSession().setMode("ace/mode/"+$(this).val());
+});
+
+{% endblock %}

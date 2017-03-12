@@ -4,7 +4,7 @@ from . import models
 class TestForm(forms.ModelForm):
     class Meta:
         model=models.Apt_Test
-        fields=['time','name','startDate','endDate']
+        fields=['time','name','endDate']
 class QuestionForm(forms.ModelForm):
     class Meta:
         model=models.Apt_Qns

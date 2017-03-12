@@ -28,8 +28,12 @@
 		<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.js' %}" crossorigin="anonymous"></script>
 		<script src="{% static 'bower_components/jquery.countdown/dist/jquery.countdown.js' %}																			"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-       <script src="{% static 'js/main.js' %}"></script>\
+       <script src="{% static 'js/main.js' %}"></script>
 		<script src="{% static 'js/reg.js' %}"></script>
+
+		<script src="{% static '/ace-builds/src/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+		<script src="{% static '/ace-builds/demo/kitchen-sink/demo.js' %}"></script>
+
 		<script type="text/javascript">
 			$(function(){
 			{% block jquery %}{% endblock %}

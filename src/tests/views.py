@@ -8,6 +8,7 @@ from django.http import HttpResponseNotAllowed
 from django.contrib import messages
 from datetime import timedelta
 from accounts import models
+from oncomp import models as omodels
 from django.http import JsonResponse
 # Create your views here.
 user=get_user_model()
@@ -34,7 +35,7 @@ class testpage(View):
                 "test_id":test_id
             }
         else:
-            return HttpResponseRedirect(reverse('result',args=(test_id)))
+            return HttpResponseRedirect(reverse('oncomp:ctest',args=(test_id)))
         return render(request, self.template_name, context)
 
     def post(self, request, test_id):

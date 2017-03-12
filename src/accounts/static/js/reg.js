@@ -1,5 +1,5 @@
 window.addEventListener("load", function () {
-
+    if (document.getElementById("dot1")){
     document.getElementById("dot1").style.opacity = "1";
     document.getElementById("dot2").style.opacity = "0.3";
     document.getElementById("dot3").style.opacity = "0.3";
@@ -22,7 +22,7 @@ window.addEventListener("load", function () {
 
     var prev3 = document.getElementById("prev3");
     prev3.addEventListener("click", prevStep3);
-
+}
     // ======== SECTION 1 =============== //
 
     function nextStep() {
