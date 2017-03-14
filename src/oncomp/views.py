@@ -1,11 +1,15 @@
-from django.shortcuts import render,reverse,redirect,HttpResponseRedirect,Http404,get_object_or_404,HttpResponse
-from django.views import View
-from . import models
-from . import forms
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.http import HttpResponseNotAllowed
-from datetime import timedelta
+from django.shortcuts import render,reverse, HttpResponseRedirect, get_object_or_404,HttpResponse
+from django.views import View
+
+from oncomp.compiler import main
 from tests import models as tmodels
+from . import forms
+from . import models
+
 user =get_user_model()
 class createtestview(View):
     def get(self,request):
@@ -21,20 +25,26 @@ class ctest(View):
         form = forms.AnswerForm()
 
         if not models.compilertestscore.objects.filter(user=request.user, test=t).exists():
-            score = models.compilertestscore.objects.create(user=request.user, test=t)
-            request.session['compilerTestscore_question'] = score.question
-            # we can eventually add the times in the respective question but for now this will do
+            request.session['compilerTestscore_question'] = 1
             q = t.compilerquestion_set.get(pk=request.session['compilerTestscore_question'])
+            score = models.compilertestscore.objects.create(user=request.user, test=t,question=q)
+
+            # we can eventually add the times in the respective question but for now this will do
+
             score.itime = q.time
             # ..
-        else:
-
-
-            score = models.compilertestscore.objects.get(user=request.user, test=t)
-
-        if request.session.has_key('compilerTestscore_question') and t.compilerquestion_set.filter(
+            context = {
+                "q": q,
+                "ctest": score,
+                "ctest_id": ctest_id,
+                "form": form
+            }
+            return render(request, self.template_name, context)
+        elif request.session.has_key('compilerTestscore_question') and t.compilerquestion_set.filter(
                 pk=request.session['compilerTestscore_question']).exists():
+
             q = t.compilerquestion_set.get(pk=request.session['compilerTestscore_question'])
+            score = models.compilertestscore.objects.get(user=request.user, test=t, question=q)
             context = {
                 "q": q,
                 "ctest": score,
@@ -60,6 +70,8 @@ class ctest(View):
             f.qid=q
             f.save()
             request.session['compilerTestscore_question']+=1
+            objects= main.process(f.program, q.pname, f.language, q.mark, q.id, request.user)
+            mark=objects.core()
             #compilation and mark
             #score will be used for mark calculations
             return HttpResponseRedirect(reverse("oncomp:ctest",args=(ctest_id)))

@@ -47,7 +47,7 @@ class compilertestscore(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     test=models.ForeignKey(tmodels.Apt_Test,on_delete=models.CASCADE)
     score=models.IntegerField(default=0)
-    question=models.IntegerField(default=1)
+    question=models.ForeignKey(Compilerquestion,models.CASCADE)
     itime=models.DurationField(default=timedelta(hours=1))
     def _str_(self):
         return self.user.email

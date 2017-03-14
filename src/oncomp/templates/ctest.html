@@ -6,17 +6,23 @@
     <div class="panel-heading">{{q}}</div>
     <div class="panel-body">{{q.prog}}</div>
   </div>
-<div id="clock2"></div>
+
 <form action="." method="POST">{% csrf_token %}
+
     <div class=" col-md-3 col-md-offset-1">
         {{ form.errors }}
         {{ form.non_field_errors }}
+
  <input type="hidden" name="time" id="timervariable2">
       {{form.language|as_crispy_field}}</div>
-    <div class="col-md-9 col-md-offset-1 ">
+    <div class="col-md-6 col-md-offset-1 ">
+            {{form.program}}
 
-    {{form.program}}
-        <button class="btn btn-primary" type="submit" id="progsub">Compile</button>
+    </div>
+    <div class="col-md-3 col-md-offset-5">
+
+        <div id="clock2"></div>
+          <button class="btn btn-primary" type="submit" id="progsub">Compile</button>
     </div>
 
 </form>
