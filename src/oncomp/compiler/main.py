@@ -5,12 +5,14 @@ from oncomp.models import CompilerTestcases
 class process:
     #creates a process class instance
     def __init__(self,prog,pname,lan,marks,qid,uid):
+
         self.pgm=prog
         self.name=pname
         self.language=lan
         self.marks=marks
         self.qid=qid
-        self.uid=str(uid)
+        self.uid=uid
+        print self.pgm,self.name,self.language,self.marks,self.qid,self.uid
     #i think core returns the mark calculated as output
     def core(self):
         a=CompilerTestcases.objects.filter(id=self.qid)
