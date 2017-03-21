@@ -11,7 +11,7 @@ from accounts import models
 from oncomp import models as omodels
 from django.http import JsonResponse
 user=get_user_model()
-class testpage(View):
+class testpage(View):#comment
     template_name = "test.html"
     def get(self, request, test_id):
         if not request.user.is_authenticated:
