@@ -16,7 +16,7 @@ class createtestview(View):
         }
         return render(request,'compiler.html',context)
 class ctest(View):
-    template_name='ctest.html'
+    template_name='ctest.html'#alif noushad
     def get(self,request,ctest_id):
         t=get_object_or_404(tmodels.Apt_Test,pk=(ctest_id))
         form = forms.AnswerForm()

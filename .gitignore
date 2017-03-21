@@ -9,3 +9,4 @@ find . -name \*.pyc -delete
 __pycache__
 src/accounts/media/
 src/db.sqlite3
+.idea
