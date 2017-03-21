@@ -15,7 +15,7 @@ class process:
         print self.pgm,self.name,self.language,self.marks,self.qid,self.uid
     #i think core returns the mark calculated as output
     def core(self):
-        a=CompilerTestcases.objects.filter(id=self.qid)
+        a=CompilerTestcases.objects.filter(question_id=self.qid)
         n=a.count()
         directory=self.start()
         d=0
@@ -42,7 +42,7 @@ class process:
     def start(self):
 
         cur=os.getcwd()
-        directory=cur+"/oncomp/compiler/"+self.uid
+        directory=cur+"/oncomp/compiler/"+str(self.uid)
         print directory
         if not os.path.exists(directory):
             os.makedirs(directory)

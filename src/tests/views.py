@@ -65,16 +65,22 @@ class testpage(View):
         else:
             if selectedchoice.correct_set.all().exists():
                 score.score += 1
-                while (request.session['Testscore_question'] <= test.apt_qns_set.count() and not (
-                test.apt_qns_set.filter(id=request.session['Testscore_question']).exists())):
-                    request.session['Testscore_question'] += 1
-                score.save()
+                request.session['Testscore_question'] += 1
+                if test.apt_qns_set.filter(id=request.session['Testscore_question']).exists():
+                    q = test.apt_qns_set.get(id=request.session['Testscore_question'])
+                else:
+                    while (request.session['Testscore_question'] <= test.apt_qns_set.count() and not (test.apt_qns_set.filter(id=request.session['Testscore_question']).exists())):
+                        request.session['Testscore_question'] += 1
+                    score.save()
                 return HttpResponseRedirect(reverse('test', args=(test_id)))
             else:
-                while (request.session['Testscore_question'] <= test.apt_qns_set.count() and not (
-                        test.apt_qns_set.filter(id=request.session['Testscore_question']).exists())):
-                    request.session['Testscore_question'] += 1
-                score.save()
+                request.session['Testscore_question'] += 1
+                if test.apt_qns_set.filter(id=request.session['Testscore_question']).exists():
+                    q = test.apt_qns_set.get(id=request.session['Testscore_question'])
+                else:
+                    while (request.session['Testscore_question'] <= test.apt_qns_set.count() and not (test.apt_qns_set.filter(id=request.session['Testscore_question']).exists())):
+                        request.session['Testscore_question'] += 1
+                    score.save()
                 return HttpResponseRedirect(reverse('test', args=(test_id)))
 class resultpage(View):
     template_name="results.html"

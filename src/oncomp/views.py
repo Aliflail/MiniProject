@@ -66,8 +66,22 @@ class ctest(View):
             mark=objects.core()
             #compilation and mark
             #score will be used for mark calculations
+            request.session['compilerTestscore_question'] += 1
+            if t.compilerquestion_set.filter(id=request.session['compilerTestscore_question']).exists():
+                q = t.compilerquestion_set.get(id=request.session['compilerTestscore_question'])
+            else:
+                while (request.session['compilerTestscore_question'] <= t.compilerquestion_set.count() and not (
+                t.compilerquestion_set.filter(id=request.session['compilerTestscore_question']).exists())):
+                    request.session['compilerTestscore_question'] += 1
             return HttpResponseRedirect(reverse("oncomp:ctest",args=(ctest_id)))
         else:
+            request.session['compilerTestscore_question'] += 1
+            if t.compilerquestion_set.filter(id=request.session['compilerTestscore_question']).exists():
+                q = t.compilerquestion_set.get(id=request.session['compilerTestscore_question'])
+            else:
+                while (request.session['compilerTestscore_question'] <= t.compilerquestion_set.count() and not (
+                        t.compilerquestion_set.filter(id=request.session['compilerTestscore_question']).exists())):
+                    request.session['compilerTestscore_question'] += 1
             return HttpResponseRedirect(reverse("oncomp:ctest", args=(ctest_id)))
 def ctestexpire(request):
     if not request.is_ajax() or not request.method == 'POST':

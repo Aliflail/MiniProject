@@ -11,7 +11,6 @@ class data:
 
 class play:
     def __init__(self,prog,pname,lan,inp,outp,marks,directory):
-        print prog,pname,lan,inp,outp,marks,directory
         self.pgm=prog
         self.name=pname
         self.language=lan
@@ -32,7 +31,7 @@ class play:
         os.remove(pgm)
 
     def compiler(self):
-        pgm=self.name
+        pgm=str(self.name)
         lc=self.language
         if lc=='c_pp':
             c=1
@@ -63,7 +62,7 @@ class play:
         print result
         return result
 
-    def getoutput(o,c):
+    def getoutput(self,o,c):
         h=open(c,"r")
         r=h.read()
         h.close()
@@ -79,7 +78,7 @@ class play:
             p=r
         os.remove(c)
         return p
-    def evaluate(a,b):
+    def evaluate(self,a,b):
         f=open(a,"r")
         p=f.read()
         f.close()
