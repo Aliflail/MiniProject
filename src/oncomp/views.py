@@ -15,7 +15,7 @@ class createtestview(View):
             "form":form,
         }
         return render(request,'compiler.html',context)
-class ctest(View):
+class ctest(View):#coment on docker
     template_name='ctest.html'
     def get(self,request,ctest_id):
         if not request.user.is_authenticated:
