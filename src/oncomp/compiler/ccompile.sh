@@ -1,4 +1,5 @@
 #!/bin/bash
+# ^
 crun()
 {
 	./a.out<$3>$1
@@ -10,12 +11,21 @@ jrun()
 prun()
 {
 	python $1<$3>$2 2>&1
+
 }
+cd $3
 pgm=$1
 out=$pgm"out.txt"
+cat > $out << END_TEXT
+some text here
+END_TEXT
 err=$pgm"err.txt"
+cat > $err<< END_TEXT
+END_TEXT
 in=$pgm"inp.txt"
-cd $3
+cat > $in << END_TEXT
+END_TEXT
+
 if [[ $2 = "1" ]]
 then
 	prog=$pgm".c"

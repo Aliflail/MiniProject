@@ -20,7 +20,7 @@ class ctest(View):
     def get(self,request,ctest_id):
         t=get_object_or_404(tmodels.Apt_Test,pk=(ctest_id))
         form = forms.AnswerForm()
-        if not models.compilertestscore.objects.filter(user=request.user, test=t).exists() and t.compilerquestion_set.filter(pk=1).exists():
+        if (not models.compilertestscore.objects.filter(user=request.user, test=t).exists()):
             request.session['compilerTestscore_question'] = 1
             q = t.compilerquestion_set.get(pk=request.session['compilerTestscore_question'])
             score = models.compilertestscore.objects.create(user=request.user, test=t,question=q)

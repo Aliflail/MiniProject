@@ -5,7 +5,6 @@ from oncomp.models import CompilerTestcases
 class process:
     #creates a process class instance
     def __init__(self,prog,pname,lan,marks,qid,uid):
-
         self.pgm=prog
         self.name=pname
         self.language=lan
@@ -23,7 +22,6 @@ class process:
             d=(self.marks)/n
         print d
         mark=0
-
         flag=False
         fin=0
         for i in a:
@@ -35,12 +33,11 @@ class process:
             mark=mark+mar
             if flag==False:
                 fin=dat.output
+                print fin
                 flag=True
         final=data(mark,fin)
-
         return final
     def start(self):
-
         cur=os.getcwd()
         directory=cur+"/oncomp/compiler/"+str(self.uid)
         print directory
