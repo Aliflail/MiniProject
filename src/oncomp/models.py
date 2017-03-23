@@ -13,7 +13,7 @@ class Compilerquestion(models.Model):
     def __str__(self):
         return self.pname
 class CompilerTestcases(models.Model):
-    testcases=models.CharField(max_length=500)
+    testcases=models.TextField(max_length=500)
     test_out = models.TextField(max_length=1000, default='No Output')
     question_id = models.ForeignKey(Compilerquestion, on_delete=models.CASCADE)
 

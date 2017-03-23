@@ -20,15 +20,15 @@ class process:
         d=0
         if n!=0:
             d=(self.marks)/n
-        print d
+
         mark=0
         flag=False
         fin=0
         for i in a:
             o=play(self.pgm,self.name,self.language,i.testcases,i.test_out,d,directory)
-            print o
+
             dat=o.compiler()
-            print dat
+
             mar=dat.marks
             mark=mark+mar
             if flag==False:

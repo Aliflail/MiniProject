@@ -1,4 +1,4 @@
-
+import subprocess
 import os
 class data:
     def __init__(self,marks,output):
@@ -17,21 +17,20 @@ class play:
         self.output=outp
         self.marks=marks
         self.directory=directory
+        print input
+    #runs the program well
     def run(self,pgm,out,c):
         err=self.directory+"/"+pgm+"err.txt"
-        cor=self.directory+"/"+pgm+"cor.txt"
         out=self.directory+"/"+out
         print pgm
         print c
         print self.directory
         command = "./oncomp/compiler/ccompile.sh %s %s %s" % (str(pgm), str(c),str(self.directory),)
-        print os.getcwd()+ command
-        p = os.system(command)
+        p = subprocess.call(command,shell=True)
+        cor=self.output
         self.output=self.getoutput(out,err)
-        print self.output +"output"+str(self.evaluate(out,cor))
         if not self.evaluate(out,cor):
             self.marks=0
-        os.remove(out)
 
 
     def compiler(self):
@@ -59,45 +58,46 @@ class play:
         f=open(fname,"w")
         f.write(prog)
         f.close()
+        inp=self.directory+"/"+self.name+"inp.txt"
+        g=open(inp,"w")
+        g.write(self.input)
+        g.close()
         out=pgm+"out"
         out=out+".txt"
         self.run(pgm,out,c)
+        os.remove(inp)
         marks=self.marks
         output=self.output
         print "compiler"+str(marks)+str(output)
         result=data(marks,output)
         return result
 
+
     def getoutput(self,o,c):
         # open the error file(ie is c) to see if error exists
-        h=open(c,"r")
-        r=h.read()
-        print r +"error"
-        h.close()
+
+        if os.path.isfile(c):
+            h=open(c,"r")
+            r=h.read()
+            h.close()
+            p = r
+            os.remove(c)
         # if there is no error k is false
-        if os.stat(c).st_size == 0:
-            k=False
         else:
-            k=True
-        if not k:
-            f=open(o,"r")
+            f=open(o,'r')
             p=f.read()
+            print p
             f.close()
-        else:
-            p=r
-        os.remove(c)
+
         return p
+
     def evaluate(self,a,b):
-        open(a, "w")
-        open(b, "w")
         f=open(a,"r")
         p=f.read()
+        print b
         f.close()
-        g=open(b,"r")
-        q=g.read()
-        g.close()
-        os.remove(b)
-        if p==q:
+        os.remove(a)
+        if str(p).rstrip('\n') == str(b):
             return True
         else:
             return False

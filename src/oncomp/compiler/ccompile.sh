@@ -13,18 +13,11 @@ prun()
 	python $1<$3>$2 2>&1
 
 }
-cd $3
 pgm=$1
 out=$pgm"out.txt"
-cat > $out << END_TEXT
-some text here
-END_TEXT
 err=$pgm"err.txt"
-cat > $err<< END_TEXT
-END_TEXT
 in=$pgm"inp.txt"
-cat > $in << END_TEXT
-END_TEXT
+cd $3
 
 if [[ $2 = "1" ]]
 then

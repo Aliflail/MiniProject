@@ -17,7 +17,7 @@ class testpage(View):
         if not request.user.is_authenticated:
             return redirect(reverse("accounts:index"))
         test = get_object_or_404(Apt_Test, pk=test_id)
-        if not (Testscore.objects.filter(user=request.user,test=test).exists()) :
+        if not (Testscore.objects.filter(user=request.user,test=test).exists()) and test.apt_qns_set.count()>0 :
             score = Testscore.objects.create(user=request.user, test=test)
             request.session['Testscore_question']=1
             if test.apt_qns_set.filter(id=request.session['Testscore_question']).exists():

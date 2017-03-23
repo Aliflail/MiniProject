@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}
+Results
+{%endblock%}
+{% block body %}
+<div class="jumbotron col-md-5 col-md-offset-2">
+    Your Score is {{score}}<br>
+    <a href="{% url 'accounts:home' %}">Lets return to home page</a>
+</div>
+{% endblock %}
