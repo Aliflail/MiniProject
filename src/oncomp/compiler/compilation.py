@@ -31,8 +31,8 @@ class play:
         print self.output +"output"+str(self.evaluate(out,cor))
         if not self.evaluate(out,cor):
             self.marks=0
-        # os.remove(out)
-        # os.remove(pgm)
+        os.remove(out)
+
 
     def compiler(self):
         pgm=str(self.name)
@@ -66,7 +66,6 @@ class play:
         output=self.output
         print "compiler"+str(marks)+str(output)
         result=data(marks,output)
-        print result
         return result
 
     def getoutput(self,o,c):

@@ -33,7 +33,7 @@ class process:
             mark=mark+mar
             if flag==False:
                 fin=dat.output
-                print fin
+                print "core"+fin
                 flag=True
         final=data(mark,fin)
         return final
