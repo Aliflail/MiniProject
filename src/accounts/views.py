@@ -1,11 +1,11 @@
-from django.shortcuts import render,redirect,get_object_or_404,HttpResponseRedirect
+from django.shortcuts import render,redirect,get_object_or_404,HttpResponseRedirect,HttpResponse
 from django.views import View
 from accounts.admin import UserCreationForm
 from django.contrib.auth import authenticate, login ,logout
 from .forms import ProfileForm
 from accounts.forms import LoginForm
 from django.contrib.auth import get_user_model
-from .models import Profile
+from .models import Profile,requests
 from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -14,6 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from . import models
 from django.urls import reverse ,reverse_lazy
 user =get_user_model()
+
 # Create your views here.
 class Indexpage(View):
     template_name='index.html'
@@ -55,7 +56,10 @@ class Registerpage(View):
             pro= profile.save(commit=False)
 
             pro.user=user
+            if pro.status!='ST':
+                requests.objects.create(user=user)
             pro.slug=slugify(pro.name)
+
             pro.save()
             if pro is not None:
                 login(request,user)
@@ -65,14 +69,24 @@ class Registerpage(View):
 class Homepage(View):
     template_name='home.html'
     tctemplate='tcpc.html'
+    adminpage="admin.html"
     def get(self,request,*args):
+
         if not request.user.is_authenticated:
             return redirect(reverse("accounts:index"))
+        # if user.is_superuser:
+        #
+        #     return render(request,self.adminpage,{})
         p=Profile.objects.get(user=request.user)
-
         if p.status != 'ST':
-            return render(request,self.tctemplate,{"profile":p,
+            req=requests.objects.get(user=request.user)
+
+            if req.isaccepted:
+
+                return render(request,self.tctemplate,{"profile":p,
                                                    "homelink":"active"})
+            else:
+                return HttpResponse("Contact tcadmin to get verified ")
         #paginatior code these contacts are really tests im too lazy to change the names
         contact_list = Apt_Test.objects.all()
         paginator = Paginator(contact_list, 5)

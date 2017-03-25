@@ -21,6 +21,7 @@
             <div class="alert alert-danger" role="alert">
             {{ form.non_field_errors }}
                  {{ profile.name.errors }}
+
             </div>
             {% endif %}
            <div class="profile-group hidden errors">
@@ -36,6 +37,7 @@
                     </li>
 
                     <li>
+                         {{ form.email.errors }}
                         <label>
                             Official email
                         </label>
@@ -53,18 +55,20 @@
 
             <div class="rightSec" id="second" style="display:none">
 
-               <li>
+               <li>{{ profile.admissionno.errors }}
                      <label>
                         Admission Number
                      </label>
                       {{ profile.admissionno }}
                 </li>
+                     {{ form.password1.errors }}
                          <label>
                             Password
                         </label>
                           {{ form.password1 }}
                     </li>
                     <li>
+                         {{ form.password2.errors }}
                         <label>
                             Re-type Password
                         </label>
@@ -84,14 +88,15 @@
 
             <div class="rightSec" id="third" style="display:none">
                 <ul>
-
+                     {{ profile.non_field_errors }}
                    <li>
+                          {{ profile.status.errors }}
                         <label>
                             Status
                         </label>
                           {{ profile.status }}
                     </li>
-                    <li>
+                    <li>  {{ profile.image.errors }}
                          <label>
                             Upload Profile Picture
                          </label>
