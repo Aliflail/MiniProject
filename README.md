@@ -6,7 +6,7 @@ this website helps in making programming and aptitude tests for our the tc in ou
 ### Prerequisites
 the user must have pip installed and recommended to have a virualenv or anyother virtual environment
 
-and then type 
+and then type in the terminal 
 ```
 pip install -r requirements.txt
 ```
@@ -19,6 +19,13 @@ or in short
 ./manage.py runserver 
 ```
 since manage.py is an executable in linux
+
+ace editor must also be installed for working the programming tests
+
+```
+cd /oncomp/static/; git clone https://github.com/ajaxorg/ace-builds
+```
+this should make everything work
 ## Authors
 
 * **AlbinPaul** - *Readmestuff* - [albinpaul](https://github.com/albinpaul)
