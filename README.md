@@ -1,6 +1,8 @@
 # MiniProject
 Miniproject Topic: Online Test Maker Website
-Languages used: HTML,sass,css,js,jquery,php,sqllite3,bootstrap,python,Django,Bashscript
+
+Languages used:HTML,sass,css,js,jquery,php,sqllite3,bootstrap,python,Django,Bashscript
+
 includes:should include ace-builds for ace editor in static [folder](https://github.com/Aliflail/MiniProject/tree/master/src/accounts/static)'
 
 this website helps in making programming and aptitude tests for our the tc in our college 
